@@ -127,6 +127,16 @@ then
 		message
 		exit 1
 	fi
+# Devuan
+elif [ "$lsb" == "Devuan" ];
+then
+	if [ $codename == "jessie" ] || [ $codename == "stretch" ] || [ $codename == "sid" ] || [ $codename == "buster" ] || [ $codename == "n/a" ] ;
+	then
+		echo -e "\nPlatform requirements satisfied, proceeding ..."
+	else
+		message
+		exit 1
+	fi
 # Mint
 elif [ "$lsb" == "LinuxMint" ];
 then
@@ -172,6 +182,12 @@ then
 	if [ $codename == "trusty" ];
 	then
         sysinitdaemon="upstart"
+	fi
+if [ "$lsb" == "Devuan" ];
+then
+	if [ $codename == "jessie" ];
+	then
+        sysinitdaemon="sysinitv"
 	fi
 # Elementary
 elif [ "$lsb" == "elementary OS" ];
@@ -251,7 +267,7 @@ sysinitdaemon=$(sysinitdaemon_get)
 # modify displaylink-installer.sh
 sed -i "s/SYSTEMINITDAEMON=unknown/SYSTEMINITDAEMON=$sysinitdaemon/g" $driver_dir/displaylink-driver-${version}/displaylink-installer.sh
 
-if [ "$lsb" == "Debian" ] || [ "$lsb" == "Kali" ] || [ "$lsb" == "Deepin" ];
+if [ "$lsb" == "Debian" ] || [ "$lsb" == "Kali" ] || [ "$lsb" == "Deepin" ] || [ "$lsb" == "Devuan" ];
 then
 	sed -i 's#/lib/modules/$KVER/build/Kconfig#/lib/modules/$KVER/build/scripts/kconfig/conf#g' $driver_dir/displaylink-driver-${version}/displaylink-installer.sh
 	ln -s /lib/modules/$(uname -r)/build/Makefile /lib/modules/$(uname -r)/build/Kconfig
@@ -305,6 +321,7 @@ root_check
 echo -e "\n--------------------------- displaylink-debian ----------------------------"
 echo -e "\nDisplayLink driver installer for Debian based Linux distributions:\n"
 echo -e "* Debian GNU/Linux"
+echo -e "* Devuan"
 echo -e "* Ubuntu"
 echo -e "* Elementary OS"
 echo -e "* Linux Mint"
