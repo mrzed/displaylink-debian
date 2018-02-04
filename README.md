@@ -40,6 +40,7 @@ sudo ./displaylink-debian.sh
   * Mint: 15 Olivia/16 Petra/17.3 Rosa/18 Sarah/18.3 Sylvia
   * Kali: kali-rolling/2016.2/2017.3
   * Deepin: 15/15.1/15.1.1/15.2/15.4.1
+  * Devuan: Jessie - adding support now
 
   Regardless of the kernel version you're using.
 
